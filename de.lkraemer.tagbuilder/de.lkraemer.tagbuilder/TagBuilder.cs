@@ -1,7 +1,7 @@
 ﻿/**
  * MIT License
  * 
- * Copyright (c) 2019 lkraemer.de
+ * Copyright (c) 2019 lk-code
  * see more at https://github.com/lk-code/net-tag-builder
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy

@@ -2,6 +2,23 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Authors>lk-code</Authors>
+    <Product>tagbuilder</Product>
+    <PackageProjectUrl>https://github.com/lk-code/net-tag-builder/wiki</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/lk-code/net-tag-builder</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Description>a simple library to generate html code from a tag object</Description>
+    <Company>lk-code</Company>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
