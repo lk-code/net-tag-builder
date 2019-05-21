@@ -24,6 +24,7 @@
  */
 
 using System.Collections.Generic;
+using System.Text;
 
 namespace de.lkraemer.tagbuilder
 {
@@ -111,7 +112,7 @@ namespace de.lkraemer.tagbuilder
         /// <returns></returns>
         public string GetRenderedAttributes()
         {
-            string attributes = string.Empty;
+            StringBuilder attributesBuilder = new StringBuilder();
 
             foreach (var attributePair in this.Attributes)
             {
@@ -120,9 +121,11 @@ namespace de.lkraemer.tagbuilder
                     string attributeResultScheme = " {0}=\"{1}\"";
                     string attributeResult = string.Format(attributeResultScheme, attributePair.Key, attributePair.Value);
 
-                    attributes += attributeResult;
+                    attributesBuilder.Append(attributeResult);
                 }
             }
+
+            string attributes = attributesBuilder.ToString();
 
             return attributes;
         }

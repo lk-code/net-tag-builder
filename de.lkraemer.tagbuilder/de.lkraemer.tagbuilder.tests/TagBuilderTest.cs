@@ -30,9 +30,46 @@ namespace de.lkraemer.tagbuilder.tests
     [TestClass]
     public class TagBuilderTest
     {
+        /// <summary>
+        /// tests the generation of the attributes
+        /// </summary>
         [TestMethod]
-        public void TestMethod1()
+        public void TestGetRenderedAttributes()
         {
+            string elementTagName = "div";
+            TagBuilder tagBuilder = new TagBuilder(elementTagName);
+
+            string idValue = "AnSimpleId";
+            tagBuilder.AddAttribute("id", idValue);
+            string classValue = "panel text-center";
+            tagBuilder.AddAttribute("class", classValue);
+
+            string attributes = tagBuilder.GetRenderedAttributes();
+
+            Assert.IsFalse(attributes.Contains("<" + elementTagName)); // the element must not contains the start tag
+            Assert.IsFalse(attributes.Contains("</" + elementTagName + ">")); // the element not must contains the end tag
+            Assert.IsTrue(attributes.Contains("id=\"" + idValue + "\"")); // the element must contain an id
+            Assert.IsTrue(attributes.Contains("class=\"" + classValue + "\"")); // the element must contain a class
+        }
+
+        /// <summary>
+        /// tests the generation of the html element
+        /// </summary>
+        [TestMethod]
+        public void TestRenderAsString()
+        {
+            string elementTagName = "p";
+            TagBuilder tagBuilder = new TagBuilder(elementTagName);
+
+            string classValue = "is--text text-center";
+            tagBuilder.AddAttribute("class", classValue);
+
+            string attributes = tagBuilder.RenderAsString();
+
+            Assert.IsTrue(attributes.Contains("<" + elementTagName)); // the element must contains the start tag
+            Assert.IsTrue(attributes.Contains("</" + elementTagName + ">")); // the element must contains the end tag
+            Assert.IsFalse(attributes.Contains("id=\"")); // the element must not contain an id
+            Assert.IsTrue(attributes.Contains("class=\"" + classValue + "\"")); // the element must contain a class
         }
     }
 }
