@@ -55,6 +55,19 @@ namespace de.lkraemer.tagbuilder
         /// </summary>
         private string tagName { get; set; } = string.Empty;
 
+        /// <summary>
+        /// contains a list of tags without a explicit tag end (input, br, etc.)
+        /// </summary>
+        private List<string> singleTagNames { get; set; } = new List<string>() {
+            "area", "base", "basefont",
+            "br", "col", "embed",
+            "frame", "hr", "img",
+            "input", "link", "mark",
+            "param", "source", "track",
+            "circle", "rect", "polygon",
+            "ellipse"
+        };
+
         #endregion
 
         /// <summary>
@@ -97,11 +110,17 @@ namespace de.lkraemer.tagbuilder
 
             html += "<" + this.tagName + "";
             html += this.GetRenderedAttributes();
-            html += ">";
 
-            html += this.InnerContent;
-
-            html += "</" + this.tagName + ">";
+            if(this.singleTagNames.Contains(this.tagName.ToLower())
+                && (string.IsNullOrEmpty(this.InnerContent) || string.IsNullOrWhiteSpace(this.InnerContent)))
+            {
+                html += " />";
+            } else
+            {
+                html += ">";
+                html += this.InnerContent;
+                html += "</" + this.tagName + ">";
+            }
 
             return html;
         }

@@ -12,7 +12,7 @@
     <Description>a simple library to generate html code from a tag object</Description>
     <Company>lk-code</Company>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>

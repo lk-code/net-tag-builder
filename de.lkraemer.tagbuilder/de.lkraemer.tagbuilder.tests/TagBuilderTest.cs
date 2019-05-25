@@ -44,12 +44,12 @@ namespace de.lkraemer.tagbuilder.tests
             string classValue = "panel text-center";
             tagBuilder.AddAttribute("class", classValue);
 
-            string attributes = tagBuilder.GetRenderedAttributes();
+            string html = tagBuilder.GetRenderedAttributes();
 
-            Assert.IsFalse(attributes.Contains("<" + elementTagName)); // the element must not contains the start tag
-            Assert.IsFalse(attributes.Contains("</" + elementTagName + ">")); // the element not must contains the end tag
-            Assert.IsTrue(attributes.Contains("id=\"" + idValue + "\"")); // the element must contain an id
-            Assert.IsTrue(attributes.Contains("class=\"" + classValue + "\"")); // the element must contain a class
+            Assert.IsFalse(html.Contains("<" + elementTagName)); // the element must not contains the start tag
+            Assert.IsFalse(html.Contains("</" + elementTagName + ">")); // the element not must contains the end tag
+            Assert.IsTrue(html.Contains("id=\"" + idValue + "\"")); // the element must contain an id
+            Assert.IsTrue(html.Contains("class=\"" + classValue + "\"")); // the element must contain a class
         }
 
         /// <summary>
@@ -64,12 +64,33 @@ namespace de.lkraemer.tagbuilder.tests
             string classValue = "is--text text-center";
             tagBuilder.AddAttribute("class", classValue);
 
-            string attributes = tagBuilder.RenderAsString();
+            string html = tagBuilder.RenderAsString();
 
-            Assert.IsTrue(attributes.Contains("<" + elementTagName)); // the element must contains the start tag
-            Assert.IsTrue(attributes.Contains("</" + elementTagName + ">")); // the element must contains the end tag
-            Assert.IsFalse(attributes.Contains("id=\"")); // the element must not contain an id
-            Assert.IsTrue(attributes.Contains("class=\"" + classValue + "\"")); // the element must contain a class
+            Assert.IsTrue(html.Contains("<" + elementTagName)); // the element must contains the start tag
+            Assert.IsTrue(html.Contains("</" + elementTagName + ">")); // the element must contains the end tag
+            Assert.IsFalse(html.Contains("id=\"")); // the element must not contain an id
+            Assert.IsTrue(html.Contains("class=\"" + classValue + "\"")); // the element must contain a class
+        }
+
+        /// <summary>
+        /// tests the generation of an input html element
+        /// </summary>
+        [TestMethod]
+        public void TestRenderInputAsString()
+        {
+            string elementTagName = "input";
+            TagBuilder tagBuilder = new TagBuilder(elementTagName);
+
+            string classValue = "is--text text-center";
+            tagBuilder.AddAttribute("class", classValue);
+
+            string html = tagBuilder.RenderAsString();
+
+            Assert.IsTrue(html.Contains("<" + elementTagName)); // the element must contains the start tag
+            Assert.IsTrue(html.Contains(" />")); // the element must contains the start tag
+            Assert.IsFalse(html.Contains("</" + elementTagName + ">")); // the element must not contains the e´xplicit end tag
+            Assert.IsFalse(html.Contains("id=\"")); // the element must not contain an id
+            Assert.IsTrue(html.Contains("class=\"" + classValue + "\"")); // the element must contain a class
         }
     }
 }
